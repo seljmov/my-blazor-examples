@@ -1,0 +1,39 @@
+﻿@page "/"
+
+@using blazor.list.dragdrop.Models
+
+<h1>Blazor List DragDrop</h1>
+
+<div>
+    @foreach (var item in Items)
+    {
+        <div draggable="true"
+             @ondragstart="() => DraggableItem = item"
+             @ondragenter="() => DestinationItem = item"
+             @ondragend="() => OnDragEnd()">
+            @item.Text
+        </div>
+    }
+</div>
+
+@code {
+    public IList<Item> Items = new List<Item>
+    {
+        new Item { Text = "Item 0" },
+        new Item { Text = "Item 1" },
+        new Item { Text = "Item 2" },
+        new Item { Text = "Item 3" },
+    };
+
+    public Item DraggableItem { get; set; }
+
+    public Item DestinationItem { get; set; }
+
+    public void OnDragEnd()
+    {
+        var destItemIndex = Items.IndexOf(DestinationItem);
+
+        Items.Remove(DraggableItem);
+        Items.Insert(destItemIndex, DraggableItem);
+    }
+}

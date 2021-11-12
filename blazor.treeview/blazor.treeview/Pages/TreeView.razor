@@ -1,0 +1,25 @@
+﻿@using blazor.treeview.Models
+
+<div>
+    @foreach (var item in Items)
+    {
+        <div style="padding-left: @($"{PaddingLeft}px");">
+            @item.Text
+
+            @if (item.Children != null)
+            {
+                <TreeView Items="item.Children"
+                          PaddingLeft="@(PaddingLeft + 16)" />
+            }
+        </div>
+    }
+</div>
+
+
+@code {
+    [Parameter]
+    public IEnumerable<TreeItem> Items { get; set; }
+
+    [Parameter]
+    public int PaddingLeft { get; set; } = 0;
+}

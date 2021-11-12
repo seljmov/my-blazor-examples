@@ -1,0 +1,30 @@
+﻿@using blazor.treeview.dragdrop.Services
+
+<div id="tree">
+    @foreach (var item in Items)
+    {
+        <div id="item_@item.Id"
+             style='padding-left: @($"{PaddingLeft}px");'
+             draggable="true"
+             @ondragstart="() => DragDropService.OnDragStart(item)"
+             @ondragenter="() => DragDropService.OnDragEnter(item)"
+             @ondragover="() => DragDropService.OnDragOver()"
+             @ondragend="() => DragDropService.OnDragEnd()">
+            Item @item.Id
+
+            @if (item.Children != null)
+            {
+                <Tree Items="item.Children"
+                      PaddingLeft="@(PaddingLeft + 16)" />
+            }
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public IList<Models.TreeItem> Items { get; set; }
+
+    [Parameter]
+    public int PaddingLeft { get; set; } = 0;
+}

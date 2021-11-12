@@ -1,0 +1,43 @@
+﻿@page "/"
+
+@using blazor.treeview.dragdrop.Models
+
+<h1>Blazor TreeView DragDrop</h1>
+
+<Tree Items="MyItems()" />
+
+@code {
+    private IList<TreeItem> MyItems()
+    {
+        var root = new TreeItem { Id = 0 };
+
+        var parent1 = new TreeItem { Id = 1, Parent = root };
+        var child1 = new TreeItem { Id = 3, Parent = parent1 };
+
+        var child2 = new TreeItem { Id = 4, Parent = parent1 };
+        var child21 = new TreeItem { Id = 6, Parent = child2 };
+        var child22 = new TreeItem { Id = 7, Parent = child2 };
+        child2.Children = new List<TreeItem> { child21, child22 };
+
+        var child3 = new TreeItem { Id = 5, Parent = parent1 };
+
+        parent1.Children = new List<TreeItem> { child1, child2, child3 };
+
+
+        var parent2 = new TreeItem { Id = 2, Parent = root };
+        var child4 = new TreeItem { Id = 8, Parent = parent2 };
+
+        var child5 = new TreeItem { Id = 9, Parent = parent2 };
+
+        var child6 = new TreeItem { Id = 10, Parent = parent2 };
+        var child61 = new TreeItem { Id = 11, Parent = child6 };
+        var child62 = new TreeItem { Id = 12, Parent = child6 };
+        child6.Children = new List<TreeItem> { child61, child62 };
+
+        parent2.Children = new List<TreeItem> { child4, child5, child6 };
+
+        root.Children = new List<TreeItem> { parent1, parent2 };
+        IList<TreeItem> items = new List<TreeItem> { root };
+        return items;
+    }
+}

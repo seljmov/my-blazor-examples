@@ -1,0 +1,36 @@
+﻿@page "/"
+
+@using blazor.treeview.Models
+
+<h1>Blazor TreeView</h1>
+
+<TreeView Items="Items" />
+
+@code {
+    public IEnumerable<TreeItem> Items = new[]
+    {
+        new TreeItem { Text = "Item 0", Children = new[]
+        {
+            new TreeItem { Text = "Item 2" },
+            new TreeItem { Text = "Item 3", Children = new[]
+            {
+                new TreeItem { Text = "Item 4" },
+                new TreeItem { Text = "Item 5" },
+                new TreeItem { Text = "Item 6" },
+            }},
+            new TreeItem { Text = "Item 7" },
+        }},
+
+        new TreeItem { Text = "Item 1", Children = new[]
+        {
+            new TreeItem { Text = "Item 8", Children = new[]
+            {
+                new TreeItem { Text = "Item 9" },
+                new TreeItem { Text = "Item 10" },
+                new TreeItem { Text = "Item 11" },
+            }},
+            new TreeItem { Text = "Item 12" },
+            new TreeItem { Text = "Item 13" },
+        }},
+    };
+}
